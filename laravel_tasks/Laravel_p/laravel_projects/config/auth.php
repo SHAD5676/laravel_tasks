@@ -14,7 +14,11 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'sessions',
+        'passwords' => 'users',
+    ],
+    'admin' => [
+        'guard' => 'sessions',
         'passwords' => 'users',
     ],
 
@@ -41,6 +45,12 @@ return [
             'provider' => 'users',
         ],
     ],
+    'admins' => [
+        'driver' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -61,6 +71,12 @@ return [
 
     'providers' => [
         'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+
+        'admins' => [
+        
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],

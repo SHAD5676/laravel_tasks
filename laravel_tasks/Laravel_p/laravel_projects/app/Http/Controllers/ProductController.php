@@ -35,29 +35,23 @@ class ProductController extends Controller
     {
 
         // Validation
-        $request->validation(
-            [
-                'prod_name' => 'required|max:10|min:3',
-                'price' => 'required',
-                'stock' => 'required',
-                'category' => 'required',
-                'sku' => 'required',
-                'photo' => 'mimes:jpeg,png,jpg|max:2048',
+        $request->validate([
+            'prod_name' => 'required|max:10|min:3',
+            'price' => 'required',
+            'stock' => 'required',
+            'sku' => 'required',
+            'photo' => 'mimes:jpeg,png,jpg|max:2048',
+        ]);
 
-            ]
+        $default_prod_image = '';
 
-
-        );
-
-        $product_image = '';
-
-        if ($request->photo == null) {
-            $product_image = 'product_photo/nophoto.jpg';
+        // Imnage Upload
+        if ($request->prod_image == null) {
+            $default_prod_image = 'images\noImage.jpg';
         } else {
-            $product_image = request()->photo->move(('product_photo'),
-                $request->photo->getClientOriginaName()
-            );
+            $default_prod_image = request()->prod_image->move('images', $request->prod_image->getClientOriginalName());
         }
+
 
         // dd($product_image);
 
@@ -69,8 +63,8 @@ class ProductController extends Controller
             'sku' => $request->sku,
             'stock' => $request->stock,
             'price' => $request->price,
-            'image' => $product_image,
-            'category_id' => $request->category,
+            'image' => $default_prod_image,
+            'category_id' => $request->category_id,
         ];
 
 
