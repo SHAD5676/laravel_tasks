@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Admin;
+namespace App\Http\Controllers\Auth\manager;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -14,7 +14,7 @@ use Illuminate\Validation\ValidationException;
 class LoginController extends Controller
 {
     public function create(){
-        return view(view: 'auth.admin_login');
+        return view(view: 'auth.manager_login');
     }
 
   public function store(Request $request): RedirectResponse
@@ -33,18 +33,18 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::ADMIN_DASHBOARD);
+        return redirect()->intended(RouteServiceProvider::MANAGER_DASHBOARD);
     }
 
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('admin')->logout();
+        Auth::guard('manager')->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        return redirect('/admin/login');
+        return redirect('/manager/login');
     }
 
  

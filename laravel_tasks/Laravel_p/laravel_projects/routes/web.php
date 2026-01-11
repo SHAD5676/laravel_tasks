@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('category', CategoryController::class);
     Route::resource('product', ProductController::class);
 });
+//Admin login.logout,register
 
 Route::middleware('guest:admin')->prefix('admin')->group( function () {
 
@@ -49,10 +50,50 @@ Route::middleware('guest:admin')->prefix('admin')->group( function () {
 
 Route::middleware('auth:admin')->prefix('admin')->group( function () {
 
- //   Route::post('logout', [App\Http\Controllers\Auth\Admin\LoginController::class, 'destroy'])->name('admin.logout');
+    Route::post('logout', [App\Http\Controllers\Auth\Admin\LoginController::class, 'destroy'])->name('admin.logout');
 
-    Route::view('/dashboard','admin.dashboard');
+    Route::view('/dashboard','backend.admin_dashboard');
 
 });
 
 require __DIR__.'/auth.php';
+
+
+
+//manager login.logout,register
+
+Route::middleware('guest:manager')->prefix('manager')->group( function () {
+
+    Route::get('login', [App\Http\Controllers\Auth\manager\LoginController::class, 'create'])->name('manager.login');
+    Route::post('login', [App\Http\Controllers\Auth\manager\LoginController::class, 'store']);
+
+   // Route::get('register', [App\Http\Controllers\Auth\Admin\RegisterController::class, 'create'])->name('admin.register');
+  //  Route::post('register', [App\Http\Controllers\Auth\Admin\RegisterController::class, 'store']);
+
+});
+
+Route::middleware('auth:manager')->prefix('manager')->group( function () {
+
+    Route::post('logout', [App\Http\Controllers\Auth\manager\LoginController::class, 'destroy'])->name('manager.logout');
+
+    Route::view('/dashboard','backend.manager_dashboard');
+
+});
+
+require __DIR__.'/auth.php';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -24,12 +24,12 @@
                 <div id="loginform">
                     <div class="logo">
                         <span class="db"><img src="assets/images/logo-icon.png" alt="logo" /></span>
-                        <h5 class="font-medium m-b-20">Sign In to Admin</h5>
+                        <h5 class="font-medium m-b-20">Sign In to Manager</h5>
                     </div>
                     <!-- Form -->
                     <div class="row">
                         <div class="col-12">
-                            <form class="form-horizontal m-t-20" id="loginform" action="{{ route('admin.login') }}" method="post">
+                            <form class="form-horizontal m-t-20" id="loginform" action="{{ route('manager.login') }}" method="post">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="ti-user"></i></span>
